@@ -11,9 +11,35 @@ import android.content.Intent
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import mozilla.telemetry.glean.debug.GleanDebugActivity
+import okhttp3.mockwebserver.MockWebServer
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.mozilla.fenix.helpers.AndroidAssetDispatcher
+import org.mozilla.fenix.helpers.HomeActivityTestRule
+import org.mozilla.fenix.helpers.TestAssetHelper
+import org.mozilla.fenix.ui.robots.navigationToolbar
 
 @RunWith(AndroidJUnit4::class)
 class ADBFaker {
+    private lateinit var mockWebServer: MockWebServer
+
+    @get:Rule
+    val activityTestRule = HomeActivityTestRule()
+
+    @Before
+    fun setUp() {
+        mockWebServer = MockWebServer().apply {
+            setDispatcher(AndroidAssetDispatcher())
+            start()
+        }
+    }
+
+    @After
+    fun tearDown() {
+        mockWebServer.shutdown()
+    }
+
 
     @Test
     fun runFakeAdb() {
@@ -41,6 +67,17 @@ class ADBFaker {
         }
 
         // add espresso steps here with desired activity
+        val defaultWebPage = TestAssetHelper.getGenericAsset(mockWebServer, 1)
+        val nextWebPage = TestAssetHelper.getGenericAsset(mockWebServer, 2)
+
+        navigationToolbar {
+        }.enterURLAndEnterToBrowser(defaultWebPage.url) {
+            verifyPageContent(defaultWebPage.content)
+        }.openNavigationToolbar {
+        }.enterURLAndEnterToBrowser(nextWebPage.url) {
+            verifyPageContent(nextWebPage.content)
+        }
+
     }
 }
 

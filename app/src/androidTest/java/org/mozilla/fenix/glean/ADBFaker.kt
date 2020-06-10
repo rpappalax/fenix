@@ -4,34 +4,13 @@ package org.mozilla.fenix.glean
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-//package mozilla.telemetry.glean.debug
-
 import android.content.ActivityNotFoundException
-//import mozilla.components.concept.fetch.Client
-
-
-//import android.content.Context
 import org.junit.Test
 import org.junit.runner.RunWith
 import android.content.Intent
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import mozilla.telemetry.glean.debug.GleanDebugActivity
-
-//import androidx.test.core.app.ApplicationProvider
-////import mozilla.telemetry.glean.Glean
-//import mozilla.components.service.glean.Glean
-//import mozilla.telemetry.glean.config.Configuration
-//import org.junit.Assert.assertEquals
-//import org.junit.Assert.assertFalse
-//import org.junit.Assert.assertNull
-//import org.junit.Assert.assertTrue
-//import org.junit.Before
-//import android.content.pm.ActivityInfo
-//import android.content.pm.ResolveInfo
-//import androidx.test.core.app.ActivityScenario.launch
-////import androidx.test.ext.junit.runners.AndroidJUnit4
-
 
 @RunWith(AndroidJUnit4::class)
 class ADBFaker {
@@ -62,7 +41,6 @@ class ADBFaker {
         }
 
         // add espresso steps here with desired activity
-
     }
 }
 

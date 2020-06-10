@@ -43,9 +43,9 @@ import java.util.zip.GZIPInputStream
  * @param data the gzipped [ByteArray] to decompress
  * @return a [String] containing the uncompressed data.
  */
-//fun decompressGZIP(data: ByteArray): String {
-//    return GZIPInputStream(ByteArrayInputStream(data)).bufferedReader().use(BufferedReader::readText)
-//}
+fun decompressGZIP(data: ByteArray): String {
+    return GZIPInputStream(ByteArrayInputStream(data)).bufferedReader().use(BufferedReader::readText)
+}
 
 /**
  * Convenience method to get the body of a request as a String.
@@ -54,14 +54,14 @@ import java.util.zip.GZIPInputStream
  *
  * @return a [String] containing the body of the request.
  */
-//fun RecordedRequest.getPlainBody(): String {
-//    return if (this.getHeader("Content-Encoding") == "gzip") {
-//        val bodyInBytes = this.body.readByteArray()
-//        decompressGZIP(bodyInBytes)
-//    } else {
-//        this.body.readUtf8()
-//    }
-//}
+fun RecordedRequest.getPlainBody(): String {
+    return if (this.getHeader("Content-Encoding") == "gzip") {
+        val bodyInBytes = this.body.readByteArray()
+        decompressGZIP(bodyInBytes)
+    } else {
+        this.body.readUtf8()
+    }
+}
 
 @RunWith(AndroidJUnit4::class)
 class BaselinePingTest {
